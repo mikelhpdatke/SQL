@@ -1,0 +1,66 @@
+CREATE TABLE TINHTHANH(
+    MATT VARchar (5),
+    TenTT varchar(50),
+    SoDan bigint,
+    PRIMARY KEY (MaTT)
+    );
+    
+CREATE TABLE LOAITP(
+    MATP varchar(5),
+    TenTP varchar(50),
+    GhiChu varchar(200),
+    PRIMARY KEY (MATP)
+    );
+
+    
+CREATE TABLE MUCDOPT(
+    MaMDPT varchar(5),
+    TenMDPT varchar(200),
+    GhiChu varchar(200),
+    PRIMARY KEY(MAMDPT)
+    );
+
+CREATE TABLE DOITUONG(
+    MADT varchar(10) NOT NULL,
+    HoDem varchar(50),
+    Ten varchar(10),
+    Tuoi int,
+    GioiTinh varchar(10),
+    QueQuan varchar(50),
+    DiaBan varchar(50),
+    TPLoai varchar(5),
+    PTMucDo varchar(5),
+    PRIMARY KEY (MADT),
+    CONSTRAINT FK_DT_TT FOREIGN KEY QueQuan REFERENCES tinhthanh MaTT ON DELETE RESTRICT ON UPDATE CASCADE
+    );
+
+
+CREATE TABLE DOITUONG(
+    MADT varchar(10) NOT NULL,
+    HoDem varchar(50),
+    Ten varchar(10),
+    Tuoi int,
+    GioiTinh varchar(10),
+    QueQuan varchar(5),
+    DiaBan varchar(5),
+    TPLoai varchar(5),
+    PTMucDo varchar(5),
+    PRIMARY KEY (MADT),
+    CONSTRAINT FK_DT_TT_QQ FOREIGN KEY (QueQuan) REFERENCES tinhthanh (MaTT) ON DELETE RESTRICT ON UPDATE CASCADE,
+   CONSTRAINT FK_DT_TT_DB FOREIGN KEY (DiaBan) REFERENCES tinhthanh (MaTT) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT FK_DT_LTP_TP FOREIGN KEY (TPLoai) REFERENCES loaitp (MATP) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT FK_DT_TT_MUCDO FOREIGN KEY (PTMucDo) REFERENCES mucdopt (MaMDPT) ON DELETE RESTRICT ON UPDATE CASCADE
+    );
+	
+	
+	INSERT INTO tinhthanh (MATT, TenTT, SoDAN) VALUES 
+('3', 'BaTrung', 1256789), 
+('2', 'BacTrieu', 456789) ,
+('4', 'HaiDuong', 1236789),
+('5', 'ThanhHoa', 1456789),
+('6', 'NhaTrang', 1456789),
+('7', 'SonLa', 123456789),
+('8', 'DaLat', 1256789),
+('9', 'HaiPhong', 123456789),
+('10', 'HungYen', 123456789),
+('11', 'LangSon', 123456789)
